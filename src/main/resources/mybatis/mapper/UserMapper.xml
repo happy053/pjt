@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="market.user.UserMapper">
+    <insert id="signUp">
+        insert into user
+        (id, pw, pwc, tel, email)
+        values
+        (#{id}, #{pw}, #{pwc}, #{tel}, #{email})
+    </insert>
+
+    <select resultType="market.user.model.UserEntity" id="selUserList">
+        select * from user
+    </select>
+</mapper>

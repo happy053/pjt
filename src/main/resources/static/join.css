@@ -1,3 +1,14 @@
 * {
+    width: 100%;
+    height: 100%;
     background-color: #e8c6c6;
+    margin: 0;
+    padding: 0;
+}
+
+#joinBox {
+    height: 30%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
 }

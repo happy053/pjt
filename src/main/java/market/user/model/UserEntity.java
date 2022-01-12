@@ -10,4 +10,6 @@ public class UserEntity {
     public String id;
     public String pw;
     public String pwc;
+    public String tel;
+    public String email;
 }
