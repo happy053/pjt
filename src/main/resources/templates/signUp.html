@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="join.css" type="text/css">
+    <link rel="stylesheet" href="signUp.css" type="text/css">
 </head>
 <body>
 <!--    <script th:if |${msg}| != null th:inline="javascript">-->
@@ -12,7 +12,7 @@
 <!--        location.replace([[${href}]]);-->
 <!--    </script>-->
 
-    <form id="joinBox" th:object="${user}" action="join" method="post" >
+    <form id="joinBox" th:object="${user}" action="signUp" method="post" >
         아이디 : <input type="text" th:field="*{id}" placeholder="아이디..">
         비밀번호 : <input type="password" th:field="*{pw}" placeholder="비밀번호..">
         비밀번호 확인 : <input type="password" th:field="*{pwc}" placeholder="비밀번호 확인..">

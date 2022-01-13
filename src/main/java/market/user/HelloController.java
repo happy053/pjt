@@ -20,27 +20,32 @@ public class HelloController {
         return "main";
     }
 
-    @GetMapping("join")
-    public String moveJoin(Model model) {
+    @GetMapping("signUp")
+    public String signUp(Model model) {
         UserEntity user = new UserEntity();
         model.addAttribute("user", user);
-        return "join";
+        return "signUp";
     }
 
     @ResponseBody
-    @PostMapping("join")
-    public int join(UserEntity user, Model model) {
-        if(service.signUp(user) == 1) {
-            model.addAttribute("msg", "이미 가입된 이메일");
-            model.addAttribute("href", "/join");
-        } else if(service.signUp(user) == 2) {
-            model.addAttribute("msg", "비밀번호 확인");
-            model.addAttribute("href", "/join");
-        } else {
-            model.addAttribute("msg", "회원가입 완료");
-            model.addAttribute("href", "/main");
-            return service.signUp(user);
-        }
-        return 0;
+    @PostMapping("signUp")
+    public int signUp(UserEntity user) {
+//        if(service.signUp(user) == 1 || service.signUp(user) == 2) {
+//            System.out.println("No");
+//        }
+        return service.signUp(user);
+    }
+
+    @GetMapping("signIn")
+    public String signIn(Model model) {
+        UserEntity user = new UserEntity();
+        model.addAttribute("user", user);
+        return "signIn";
+    }
+
+    @ResponseBody
+    @PostMapping
+    public String signIn(UserEntity user) {
+        return service.signIn(user);
     }
 }

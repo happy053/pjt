@@ -11,14 +11,15 @@ public class UserService {
     @Autowired UserMapper mapper;
 
     public int signUp(UserEntity user) {
-        UserEntity[] check = mapper.selUserList();
-        for(int i=0; i<check.length; i++) {
-            if(check[i].email == user.email) {
-                return 1;
-            } else if(user.pw != user.pwc) {
-                return 2;
-            }
-        }
         return mapper.signUp(user);
+    }
+
+    public String signIn(UserEntity user) {
+        if(mapper.selUserList(user) == null) {
+            return "아이디 불일치";
+//        } else if(pwEncoder.matches(mapper.selUserList(user), user.getPw()) == false) {
+//            return "비밀번호 불일치";
+        }
+        return mapper.selUserList(user);
     }
 }

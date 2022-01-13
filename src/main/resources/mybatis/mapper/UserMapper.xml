@@ -3,12 +3,13 @@
 <mapper namespace="market.user.UserMapper">
     <insert id="signUp">
         insert into user
-        (id, pw, pwc, tel, email)
+        (id, pw, tel, email)
         values
-        (#{id}, #{pw}, #{pwc}, #{tel}, #{email})
+        (#{id}, #{pw}, #{tel}, #{email})
     </insert>
 
-    <select resultType="market.user.model.UserEntity" id="selUserList">
-        select * from user
+    <select resultType="String" id="selUserList">
+        select pw from user
+        where #{id}
     </select>
 </mapper>
