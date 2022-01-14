@@ -6,6 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserMapper {
-    int signUp(UserEntity user);
-    String selUserList(UserEntity user);
+    UserEntity selUser(UserEntity param);
+    int join(UserEntity param);
 }

@@ -11,41 +11,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloController {
 
+    @Autowired
+    private UserService service;
 
-    @Autowired private UserService service;
+    @GetMapping("/join")
+    public String join(Model model) {
+        model.addAttribute("user", new UserEntity());
+        return "/join";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("param", new UserEntity());
+        return "/login";
+    }
+
+    @GetMapping("/non")
+    public String non() {
+        return "/non";
+    }
 
     @GetMapping("/")
-    public String mainHome(Model model){
-        model.addAttribute("hello", "thymeleaf");
-        return "main";
+    public String main() {
+        return "/main";
     }
 
-    @GetMapping("signUp")
-    public String signUp(Model model) {
-        UserEntity user = new UserEntity();
-        model.addAttribute("user", user);
-        return "signUp";
+    @PostMapping("/join")
+    public String join(UserEntity param) {
+        service.join(param);
+        return "redirect:main";
     }
 
-    @ResponseBody
-    @PostMapping("signUp")
-    public int signUp(UserEntity user) {
-//        if(service.signUp(user) == 1 || service.signUp(user) == 2) {
-//            System.out.println("No");
-//        }
-        return service.signUp(user);
-    }
-
-    @GetMapping("signIn")
-    public String signIn(Model model) {
-        UserEntity user = new UserEntity();
-        model.addAttribute("user", user);
-        return "signIn";
-    }
-
-    @ResponseBody
-    @PostMapping
-    public String signIn(UserEntity user) {
-        return service.signIn(user);
+    @PostMapping("/login")
+    public String login(UserEntity param) {
+        if(service.login(param) == true) {
+            return "/";
+        } else {
+            return "redirect:non";
+        }
     }
 }

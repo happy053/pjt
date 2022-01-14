@@ -7,9 +7,10 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserEntity {
-    public String id;
-    public String pw;
-    public String pwc;
-    public String tel;
-    public String email;
+    private int userNum;
+    private String id;
+    private String pw;
+    private String nm;
+    private String tel;
+    private String email;
 }

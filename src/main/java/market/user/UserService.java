@@ -2,24 +2,26 @@ package market.user;
 
 import market.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
 
 @Service
 public class UserService {
-    @Autowired UserMapper mapper;
+    @Autowired
+    private UserMapper mapper;
 
-    public int signUp(UserEntity user) {
-        return mapper.signUp(user);
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public int join(UserEntity param) {
+        String hashedPw = passwordEncoder.encode(param.getPw());
+        param.setPw(hashedPw);
+        return mapper.join(param);
     }
 
-    public String signIn(UserEntity user) {
-        if(mapper.selUserList(user) == null) {
-            return "아이디 불일치";
-//        } else if(pwEncoder.matches(mapper.selUserList(user), user.getPw()) == false) {
-//            return "비밀번호 불일치";
-        }
-        return mapper.selUserList(user);
+    public boolean login(UserEntity param) {
+        return passwordEncoder.matches(param.getPw(), mapper.selUser(param).getPw());
     }
 }
