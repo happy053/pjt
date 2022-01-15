@@ -21,7 +21,11 @@ public class UserService {
         return mapper.join(param);
     }
 
-    public boolean login(UserEntity param) {
-        return passwordEncoder.matches(param.getPw(), mapper.selUser(param).getPw());
-    }
+//    public boolean login(UserEntity param) {
+//        System.out.println("sdfkjaskflsdf");
+//        if(mapper.selUser(param) == null) {
+//            return false;
+//        }
+//        return passwordEncoder.matches(param.getPw(), mapper.selUser(param).getPw());
+//    }
 }
