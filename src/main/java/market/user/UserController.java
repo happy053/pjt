@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.security.Principal;
+
 
 @Controller
 @RequestMapping("/user")
@@ -42,8 +41,8 @@ public class UserController {
     }
 
     @GetMapping("/main")
-    public String main(Principal principal) {
-        System.out.println(principal.getName());
+    public String main() {
+
         return "/user/main";
     }
 
