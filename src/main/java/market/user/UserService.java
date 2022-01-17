@@ -21,6 +21,10 @@ public class UserService {
         return mapper.join(param);
     }
 
+    public UserEntity selUser(UserEntity param) {
+        return mapper.selUser(param);
+    }
+
 //    public boolean login(UserEntity param) {
 //        System.out.println("sdfkjaskflsdf");
 //        if(mapper.selUser(param) == null) {

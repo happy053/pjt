@@ -3,6 +3,8 @@
 <mapper namespace="market.feed.FeedMapper">
     <insert id="insFeed">
         insert into feed
-        ()
+        ( title, contents, sellNbuy, userNum)
+        values
+        (#{title}, #{contents}, #{sellNbuy}, #{userNum})
     </insert>
 </mapper>
