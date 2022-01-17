@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default_layout">>
+    <div layout:fragment="content">
+        <table>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>글제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="feed : ${feed}">
+                <td>
+                    <span th:text="${feed.getFeedNum()}"></span>
+                </td>
+                <td>
+                    <a th:href="@{/feed/feedDetail(feedNum=${feed.getFeedNum()})}">
+                        <span th:text="${feed.getTitle()}"></span>
+                    </a>
+                </td>
+                <td>
+                    <span th:text="${feed.getId()}"></span>
+                </td>
+                <td>
+                    <span th:text="${feed.getYmd()}"></span>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</html>

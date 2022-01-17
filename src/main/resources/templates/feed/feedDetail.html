@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default_layout">>
+<div layout:fragment="content">
+
+    <h1 th:text="${feed.getTitle()}"></h1>
+    <div th:text="${feed.getId()}"></div><br>
+    <div th:text="${feed.getYmd()}"></div><br>
+    내용
+    <div th:text="${feed.getContents()}"></div>
+    <button><a th:href="@{/feed/feedDelete(feedNum=${feed.getFeedNum()})}">삭제하기</a></button>
+    <button><a th:href="@{/feed/update(feedNum=${feed.getFeedNum()})}">수정하기</a></button>
+</div>
+</html>

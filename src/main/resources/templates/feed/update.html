@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default_layout">>
+<div layout:fragment="content">
+    <form th:action="@{update}" method="post" th:object="${detail}">
+        <div>제목 : <input type="text" th:field="*{title}" th:value="${detail.getTitle()}"></div>
+        <div>내용 : <input type="text" th:field="*{contents}" th:value="${detail.getContents()}"></div>
+        <div type="hidden" th:field="*{feedNum}" th:value="${detail.getFeedNum()}"></div>
+        <input type="submit" value="수정하기">
+    </form>
+</div>
+</html>

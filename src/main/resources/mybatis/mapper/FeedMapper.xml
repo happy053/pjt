@@ -3,8 +3,29 @@
 <mapper namespace="market.feed.FeedMapper">
     <insert id="insFeed">
         insert into feed
-        ( title, contents, sellNbuy, userNum)
+        ( title, contents, sellNbuy, userNum, id)
         values
-        (#{title}, #{contents}, #{sellNbuy}, #{userNum})
+        (#{title}, #{contents}, #{sellNbuy}, #{userNum}, #{id})
     </insert>
+
+    <select resultType="market.feed.model.WriteEntity" id="selFeed">
+        select * from feed
+    </select>
+
+    <select resultType="market.feed.model.WriteEntity" id="selDetail">
+        select * from feed
+        where feedNum = #{feedNum}
+    </select>
+
+    <delete id="delFeed">
+        delete from feed
+        where feedNum = #{feedNum}
+    </delete>
+
+    <update id="update">
+        update feed
+            set title = #{title},
+                contents = #{contents}
+        where feedNum = #{feedNum}
+    </update>
 </mapper>
