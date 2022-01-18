@@ -17,9 +17,8 @@ public class FeedService {
         return mapper.insFeed(write);
     }
 
-    public ArrayList<WriteEntity> selFeed() {
-        ArrayList<WriteEntity> list = mapper.selFeed();
-        return mapper.selFeed();
+    public ArrayList<WriteEntity> selFeed(int count) {
+        return mapper.selFeed(count);
     }
 
     public WriteEntity selDetail(int feedNum) {
@@ -33,5 +32,6 @@ public class FeedService {
     public int update(WriteEntity param) {
         return mapper.update(param);
     }
+    public int feedCount() { return mapper.feedCount(); }
 
 }

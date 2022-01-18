@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -40,9 +41,27 @@ public class FeedController {
     }
 
     @GetMapping("/feedList")
-    public String feedList(Model model) {
-        List<WriteEntity> feedList = service.selFeed();
-        model.addAttribute("feed", feedList);
+    public String feedList(Model model, @RequestParam int count) {
+        List<WriteEntity> feedList = new ArrayList<WriteEntity>();
+        System.out.println(count);
+        int feedCount = service.feedCount();
+        if(feedCount < 10) {
+            feedCount = 0;
+        } else {
+            ArrayList<Integer> list = new ArrayList<Integer>();
+            feedCount = (feedCount / 10);
+            for(int i=1; i<=feedCount; i++) {
+                list.add(i);
+            }
+            model.addAttribute("feedCount", list);
+        }
+        if(count > 0) {
+            feedList = service.selFeed(count * 10);
+            model.addAttribute("feed", feedList);
+        } else {
+            feedList = service.selFeed(count);
+            model.addAttribute("feed", feedList);
+        }
         return "/feed/feedList";
     }
 

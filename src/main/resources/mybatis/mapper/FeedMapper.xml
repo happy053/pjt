@@ -9,7 +9,7 @@
     </insert>
 
     <select resultType="market.feed.model.WriteEntity" id="selFeed">
-        select * from feed
+        select * from feed limit #{count}, 10
     </select>
 
     <select resultType="market.feed.model.WriteEntity" id="selDetail">
@@ -28,4 +28,8 @@
                 contents = #{contents}
         where feedNum = #{feedNum}
     </update>
+
+    <select id="feedCount" resultType="int">
+        select count(*) from feed
+    </select>
 </mapper>

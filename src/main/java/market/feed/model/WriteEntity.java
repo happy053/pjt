@@ -14,4 +14,5 @@ public class WriteEntity {
     private int sellNbuy;
     private int userNum;
     private String ymd;
+    private int count;
 }

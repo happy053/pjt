@@ -9,8 +9,9 @@ import java.util.ArrayList;
 @Mapper
 public interface FeedMapper {
     int insFeed(WriteEntity write);
-    ArrayList<WriteEntity> selFeed();
+    ArrayList<WriteEntity> selFeed(int count);
     WriteEntity selDetail(int feedNum);
     int delFeed(int feedNum);
     int update(WriteEntity param);
+    int feedCount();
 }
