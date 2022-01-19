@@ -8,11 +8,11 @@
         (#{title}, #{contents}, #{sellNbuy}, #{userNum}, #{id})
     </insert>
 
-    <select resultType="market.feed.model.WriteEntity" id="selFeed">
+    <select resultType="market.feed.model.FeedEntity" id="selFeed">
         select * from feed limit #{count}, 10
     </select>
 
-    <select resultType="market.feed.model.WriteEntity" id="selDetail">
+    <select resultType="market.feed.model.FeedEntity" id="selDetail">
         select * from feed
         where feedNum = #{feedNum}
     </select>

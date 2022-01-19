@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/css/test/test.css" />
 </th:block>
 
-    <div layout:fragment="content">
+    <div id="content" layout:fragment="content">
         <form th:action="@{login}" method="post" th:object="${param}">
             <div><input type="text" th:field="*{id}" autofocus required></div>
             <div><input type="password" th:field="*{pw}" required></div>

@@ -1,11 +1,10 @@
 package market.feed;
 
-import market.feed.model.WriteEntity;
+import market.feed.model.FeedEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class FeedService {
@@ -13,15 +12,15 @@ public class FeedService {
     @Autowired
     private FeedMapper mapper;
 
-    public int insFeed(WriteEntity write) {
+    public int insFeed(FeedEntity write) {
         return mapper.insFeed(write);
     }
 
-    public ArrayList<WriteEntity> selFeed(int count) {
+    public ArrayList<FeedEntity> selFeed(int count) {
         return mapper.selFeed(count);
     }
 
-    public WriteEntity selDetail(int feedNum) {
+    public FeedEntity selDetail(int feedNum) {
         return mapper.selDetail(feedNum);
     }
 
@@ -29,7 +28,7 @@ public class FeedService {
         return mapper.delFeed(feedNum);
     }
 
-    public int update(WriteEntity param) {
+    public int update(FeedEntity param) {
         return mapper.update(param);
     }
     public int feedCount() { return mapper.feedCount(); }

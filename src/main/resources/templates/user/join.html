@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="default_layout">>
 
-    <div layout:fragment="content">
+    <div id="content" layout:fragment="content">
         <form th:action="@{join}" method="post" th:object="${user}">
             <div><input type="text" th:field="*{id}" placeholder="id" autofocus required></div>
             <div><input type="password" th:field="*{pw}" placeholder="password" required></div>

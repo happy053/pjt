@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class WriteEntity {
+public class FeedEntity {
     private int feedNum;
     private String id;
     private String title;

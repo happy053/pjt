@@ -1,3 +1,16 @@
-* {
+#content {
     background-color: #ec9999;
+    margin:0;
+    padding: 0;
+}
+
+#header {
+    background-color: #40684d;
+    margin:0;
+    padding: 0;
+}
+
+* {
+    margin:0;
+    padding: 0;
 }

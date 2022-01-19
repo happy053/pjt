@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="default_layout">
 
-    <div layout:fragment="content">
+    <div id="content" layout:fragment="content">
         <button><a href="/user/login">로그인</a></button>
         <button><a href="/user/join">회원가입</a></button>
         <form th:action="@{logout}" method="get">

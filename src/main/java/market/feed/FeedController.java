@@ -1,6 +1,6 @@
 package market.feed;
 
-import market.feed.model.WriteEntity;
+import market.feed.model.FeedEntity;
 import market.user.UserService;
 import market.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +24,13 @@ public class FeedController {
     @GetMapping("/write")
     public String write(Model model) {
 
-        model.addAttribute("write", new WriteEntity());
+        model.addAttribute("write", new FeedEntity());
 
         return "/feed/write";
     }
 
     @PostMapping("/write")
-    public String write(WriteEntity write, Principal principal) {
+    public String write(FeedEntity write, Principal principal) {
         UserEntity param = new UserEntity();
         param.setId(principal.getName());
         write.setUserNum(userService.selUser(param).getUserNum());
@@ -41,9 +41,9 @@ public class FeedController {
     }
 
     @GetMapping("/feedList")
-    public String feedList(Model model, @RequestParam int count) {
-        List<WriteEntity> feedList = new ArrayList<WriteEntity>();
-        System.out.println(count);
+    public String feedList(Model model) {
+        List<FeedEntity> feedList = new ArrayList<FeedEntity>();
+//        System.out.println(count);
         int feedCount = service.feedCount();
         if(feedCount < 10) {
             feedCount = 0;
@@ -55,13 +55,13 @@ public class FeedController {
             }
             model.addAttribute("feedCount", list);
         }
-        if(count > 0) {
-            feedList = service.selFeed(count * 10);
-            model.addAttribute("feed", feedList);
-        } else {
-            feedList = service.selFeed(count);
-            model.addAttribute("feed", feedList);
-        }
+//        if(count > 0) {
+//            feedList = service.selFeed(count * 10);
+//            model.addAttribute("feed", feedList);
+//        } else {
+//            feedList = service.selFeed(count);
+//            model.addAttribute("feed", feedList);
+//        }
         return "/feed/feedList";
     }
 
@@ -79,14 +79,14 @@ public class FeedController {
 
     @GetMapping("/update")
     public String feedUpdate(@RequestParam int feedNum, Model model) {
-        WriteEntity param = service.selDetail(feedNum);
+        FeedEntity param = service.selDetail(feedNum);
         param.setFeedNum(feedNum);
         model.addAttribute("detail", param);
         return "/feed/update";
     }
 
     @PostMapping("/update")
-    public String feedUpdate(WriteEntity param) {
+    public String feedUpdate(FeedEntity param) {
         System.out.println(param.getFeedNum());
         System.out.println(param.getTitle());
         service.update(param);
