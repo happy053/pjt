@@ -9,7 +9,9 @@
     </insert>
 
     <select resultType="market.feed.model.FeedEntity" id="selFeed">
-        select * from feed limit #{count}, 10
+        select * from feed
+        order by feedNum desc
+        limit #{count}, 10
     </select>
 
     <select resultType="market.feed.model.FeedEntity" id="selDetail">

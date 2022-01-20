@@ -10,9 +10,10 @@
 
   <body>
     <th:block th:replace="fragment/header :: headerFragment"></th:block>
-
-    <th:block layout:fragment="content"></th:block>
-
+    <div id="flex">
+        <th:block th:replace="fragment/sidebar :: sidebarFragment"></th:block>
+        <th:block layout:fragment="content"></th:block>
+    </div>
     <th:block th:replace="fragment/footer :: footerFragment"></th:block>
   </body>
 </html>

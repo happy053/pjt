@@ -4,12 +4,6 @@
       layout:decorator="default_layout">
 
     <div id="content" layout:fragment="content">
-        <button><a href="/user/login">로그인</a></button>
-        <button><a href="/user/join">회원가입</a></button>
-        <form th:action="@{logout}" method="get">
-            <input type="submit" value="로그아웃">
-        </form>
-        <button><a href="/feed/write">글쓰기</a></button>
-        <button><a th:href="@{/feed/feedList(0)}">글목록</a></button>
+        <h1>메인</h1>
     </div>
 </html>

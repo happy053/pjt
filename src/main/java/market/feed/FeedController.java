@@ -23,7 +23,6 @@ public class FeedController {
 
     @GetMapping("/write")
     public String write(Model model) {
-
         model.addAttribute("write", new FeedEntity());
 
         return "/feed/write";
@@ -43,7 +42,8 @@ public class FeedController {
     @GetMapping("/feedList")
     public String feedList(Model model) {
         List<FeedEntity> feedList = new ArrayList<FeedEntity>();
-//        System.out.println(count);
+        int count = 0;
+        System.out.println(count);
         int feedCount = service.feedCount();
         if(feedCount < 10) {
             feedCount = 0;
@@ -55,13 +55,13 @@ public class FeedController {
             }
             model.addAttribute("feedCount", list);
         }
-//        if(count > 0) {
-//            feedList = service.selFeed(count * 10);
-//            model.addAttribute("feed", feedList);
-//        } else {
-//            feedList = service.selFeed(count);
-//            model.addAttribute("feed", feedList);
-//        }
+        if(count > 0) {
+            feedList = service.selFeed(count * 10);
+            model.addAttribute("feed", feedList);
+        } else {
+            feedList = service.selFeed(count);
+            model.addAttribute("feed", feedList);
+        }
         return "/feed/feedList";
     }
 
@@ -90,6 +90,6 @@ public class FeedController {
         System.out.println(param.getFeedNum());
         System.out.println(param.getTitle());
         service.update(param);
-        return "/feed/feedDetail?"+ param.getFeedNum();
+        return "redirect:/feed/feedDetail?feedNum="+ param.getFeedNum();
     }
 }

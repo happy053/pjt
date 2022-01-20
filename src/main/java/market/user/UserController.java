@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("param", new UserEntity());
-        model.addAttribute("error", "ㅋㅋㅋㅋ");
+
         return "/user/login";
     }
 
@@ -67,7 +67,7 @@ public class UserController {
 //
 //    }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated()) {

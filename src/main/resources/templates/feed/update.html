@@ -6,7 +6,7 @@
     <form th:action="@{update}" method="post" th:object="${detail}">
         <div>제목 : <input type="text" th:field="*{title}" th:value="${detail.getTitle()}"></div>
         <div>내용 : <input type="text" th:field="*{contents}" th:value="${detail.getContents()}"></div>
-        <input type="hidden" th:field="*{feedNum}" th:value="${detail.getFeedNum()}">
+        <div><input type="hidden" th:field="*{feedNum}" id="feedNum" name="feedNum"></div>
         <input type="submit" value="수정하기">
     </form>
 </div>
