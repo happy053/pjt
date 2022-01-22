@@ -92,4 +92,10 @@ public class FeedController {
         service.update(param);
         return "redirect:/feed/feedDetail?feedNum="+ param.getFeedNum();
     }
+
+//    @PostMapping("/search")
+//    public FeedEntity feedSearch(String search) {
+//        String a = if()
+//    }
+
 }
