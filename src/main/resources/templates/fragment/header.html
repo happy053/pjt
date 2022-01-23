@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<script src="jquery-3.5.1.min.js"></script>
 
 
   <div id="header" th:fragment="headerFragment">
-    <form action="/feed/search" type="post">
+
+    <div>
       <input type="text" id="searchCtnt">
-      <input type="submit" value="검색" th:onclick="'javascript:search()'">
-    </form>
-    <select name="search" id="search">
+      <button th:onclick="'javascript:search()'">검색</button>
+    </div>
+
+    <select name="search" id="searchVal">
       <option value="title">제목</option>
       <option value="content">내용</option>
       <option value="writer">작성자</option>
@@ -20,7 +22,7 @@
       <li><a href="/user/join">회원가입</a></li>
       <li><a href="/user/logout">로그아웃</a></li>
       <li><a href="/feed/write">글쓰기</a></li>
-      <li><a href="/feed/feedList">글목록</a></li>
+      <li><a href="/feed/feedList?feedCount=1">글목록</a></li>
     </ul>
 
   </div>

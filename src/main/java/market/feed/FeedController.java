@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/feed")
@@ -40,28 +42,37 @@ public class FeedController {
     }
 
     @GetMapping("/feedList")
-    public String feedList(Model model) {
+    public String feedList(Model model, HttpServletRequest request) {
         List<FeedEntity> feedList = new ArrayList<FeedEntity>();
-        int count = 0;
+        String Scount = request.getParameter("feedCount");
+        int count = Integer.parseInt(Scount);
+
         System.out.println(count);
+
         int feedCount = service.feedCount();
         if(feedCount < 10) {
-            feedCount = 0;
+            feedCount = 1;
         } else {
             ArrayList<Integer> list = new ArrayList<Integer>();
-            feedCount = (feedCount / 10);
+            feedCount = (feedCount / 10) + 1;
             for(int i=1; i<=feedCount; i++) {
                 list.add(i);
             }
             model.addAttribute("feedCount", list);
         }
         if(count > 0) {
-            feedList = service.selFeed(count * 10);
+            feedList = service.selFeed((count - 1) * 10);
             model.addAttribute("feed", feedList);
         } else {
             feedList = service.selFeed(count);
             model.addAttribute("feed", feedList);
         }
+        return "/feed/feedList";
+    }
+
+    @PostMapping("/feedList")
+    public String feedList(int a) {
+        System.out.println(a);
         return "/feed/feedList";
     }
 
@@ -93,9 +104,13 @@ public class FeedController {
         return "redirect:/feed/feedDetail?feedNum="+ param.getFeedNum();
     }
 
-//    @PostMapping("/search")
-//    public FeedEntity feedSearch(String search) {
-//        String a = if()
-//    }
+    @RequestMapping(value = "/search", method=RequestMethod.GET)
+    public String feedSearch(@RequestParam Map<String, Object> param) {
+        String ctnt = (String)param.get("ctnt");
+        String value = (String)param.get("value");
+        System.out.println(ctnt);
+        System.out.println(value);
+        return "/feed/feedList";
+    }
 
 }

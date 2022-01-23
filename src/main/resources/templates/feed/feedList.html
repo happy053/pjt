@@ -36,7 +36,7 @@
         </table>
 
         <span th:each="count, numStat : ${feedCount}">
-            <a th:href="@{/feed/feedList}">
+            <a th:href="@{/feed/feedList(feedCount=${numStat.count})}">
                 <span th:text="|${numStat.count}|"></span>
             </a>
         </span>
