@@ -33,4 +33,6 @@ public class FeedService {
     }
     public int feedCount() { return mapper.feedCount(); }
 
+    public ArrayList<FeedEntity> search(String value, String ctnt) { return mapper.search(value, ctnt); }
+
 }

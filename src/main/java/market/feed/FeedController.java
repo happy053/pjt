@@ -44,13 +44,9 @@ public class FeedController {
     @GetMapping("/feedList")
     public String feedList(Model model, HttpServletRequest request) {
         List<FeedEntity> feedList = new ArrayList<FeedEntity>();
-        String Scount = request.getParameter("feedCount");
-        int count = Integer.parseInt(Scount);
-
-        System.out.println(count);
-
         int feedCount = service.feedCount();
-        if(feedCount < 10) {
+
+        if(feedCount < 10) { // 피드글의 개수를 활용한 글목록 페이징 처리
             feedCount = 1;
         } else {
             ArrayList<Integer> list = new ArrayList<Integer>();
@@ -60,12 +56,20 @@ public class FeedController {
             }
             model.addAttribute("feedCount", list);
         }
-        if(count > 0) {
-            feedList = service.selFeed((count - 1) * 10);
+
+        if(request.getParameter("searchVal") != null) { // 글 검색시 보여줄 목록 생성
+            feedList = service.search(request.getParameter("searchVal"), request.getParameter("searchCtnt"));
             model.addAttribute("feed", feedList);
-        } else {
-            feedList = service.selFeed(count);
-            model.addAttribute("feed", feedList);
+            System.out.println(feedList);
+        } else if(request.getParameter("feedCount") != null) { // 글목록 페이징 번호 클릭시 마다 보여줄 글(10개 단위)
+            int count = Integer.parseInt(request.getParameter("feedCount"));
+            if (count > 0) {
+                feedList = service.selFeed((count - 1) * 10);
+                model.addAttribute("feed", feedList);
+            } else {
+                feedList = service.selFeed(count);
+                model.addAttribute("feed", feedList);
+            }
         }
         return "/feed/feedList";
     }
@@ -85,7 +89,7 @@ public class FeedController {
     @GetMapping("/feedDelete")
     public String feedDelete(@RequestParam int feedNum) {
         service.delFeed(feedNum);
-        return "redirect:/feed/feedList";
+        return "redirect:/feed/feedList?feedCount=1 ";
     }
 
     @GetMapping("/update")
@@ -104,13 +108,5 @@ public class FeedController {
         return "redirect:/feed/feedDetail?feedNum="+ param.getFeedNum();
     }
 
-    @RequestMapping(value = "/search", method=RequestMethod.GET)
-    public String feedSearch(@RequestParam Map<String, Object> param) {
-        String ctnt = (String)param.get("ctnt");
-        String value = (String)param.get("value");
-        System.out.println(ctnt);
-        System.out.println(value);
-        return "/feed/feedList";
-    }
 
 }

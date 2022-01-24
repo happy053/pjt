@@ -34,4 +34,10 @@
     <select id="feedCount" resultType="int">
         select count(*) from feed
     </select>
+
+    <select id="search" resultType="market.feed.model.FeedEntity">
+        <![CDATA[
+            select * from feed where #{value} LIKE %#{ctnt}%
+        ]]>
+        </select>
 </mapper>

@@ -14,4 +14,5 @@ public interface FeedMapper {
     int delFeed(int feedNum);
     int update(FeedEntity param);
     int feedCount();
+    ArrayList<FeedEntity> search(String value, String ctnt);
 }
