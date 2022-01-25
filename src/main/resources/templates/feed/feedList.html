@@ -34,12 +34,21 @@
             </tr>
             </tbody>
         </table>
-
-        <span th:each="count, numStat : ${feedCount}">
-            <a th:href="@{/feed/feedList(feedCount=${numStat.count})}">
-                <span th:text="|${numStat.count}|"></span>
-            </a>
+        <span th:if="${feedCount} != 0">
+            <span th:each="count, numStat : ${feedCount}">
+                <a th:href="@{/feed/feedList(feedCount=${numStat.count})}">
+                    <span th:text="|${numStat.count}|"></span>
+                </a>
+            </span>
         </span>
+        <span th:if="${feedSearchCount} != 0">
+            <span th:each="count, numStat : ${feedSearchCount}">
+                <a th:href="@{/feed/feedList(feedSearch=${numStat.count}, searchVal=${value}, searchCtnt=${ctnt})}">
+                    <span th:text="|${numStat.count}|"></span>
+                </a>
+            </span>
+        </span>
+
 
 
     </div>

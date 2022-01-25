@@ -36,8 +36,22 @@
     </select>
 
     <select id="search" resultType="market.feed.model.FeedEntity">
-        <![CDATA[
-            select * from feed where #{value} LIKE %#{ctnt}%
-        ]]>
-        </select>
+        select *
+        from feed
+        where ${value} LIKE CONCAT('%', #{ctnt}, '%')
+        limit 0, 10
+    </select>
+
+    <select id="searchL" resultType="market.feed.model.FeedEntity">
+        select *
+        from feed
+        where ${value} LIKE CONCAT('%', #{ctnt}, '%')
+        limit #{count}, 10
+    </select>
+
+    <select id="selSearch" resultType="int">
+        select count(*)
+        from feed
+        where ${value} like concat('%', #{ctnt}, '%')
+    </select>
 </mapper>

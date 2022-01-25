@@ -15,4 +15,6 @@ public interface FeedMapper {
     int update(FeedEntity param);
     int feedCount();
     ArrayList<FeedEntity> search(String value, String ctnt);
+    ArrayList<FeedEntity> searchL(int count, String value, String ctnt);
+    int selSearch(String value, String ctnt);
 }

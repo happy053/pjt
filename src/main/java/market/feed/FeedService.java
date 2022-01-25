@@ -34,5 +34,8 @@ public class FeedService {
     public int feedCount() { return mapper.feedCount(); }
 
     public ArrayList<FeedEntity> search(String value, String ctnt) { return mapper.search(value, ctnt); }
+    public ArrayList<FeedEntity> searchL(int count, String value, String ctnt) { return mapper.searchL(count, value, ctnt); }
+    public int selSearch(String value, String ctnt) { return mapper.selSearch(value, ctnt); }
+
 
 }

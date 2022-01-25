@@ -44,23 +44,36 @@ public class FeedController {
     @GetMapping("/feedList")
     public String feedList(Model model, HttpServletRequest request) {
         List<FeedEntity> feedList = new ArrayList<FeedEntity>();
-        int feedCount = service.feedCount();
-
-        if(feedCount < 10) { // 피드글의 개수를 활용한 글목록 페이징 처리
-            feedCount = 1;
-        } else {
-            ArrayList<Integer> list = new ArrayList<Integer>();
-            feedCount = (feedCount / 10) + 1;
-            for(int i=1; i<=feedCount; i++) {
-                list.add(i);
-            }
-            model.addAttribute("feedCount", list);
-        }
+        int feedCount = service.feedCount(); // 피드글의 개수를 활용한 글목록 페이징 처리
+        ArrayList<Integer> list = new ArrayList<Integer>();
 
         if(request.getParameter("searchVal") != null) { // 글 검색시 보여줄 목록 생성
-            feedList = service.search(request.getParameter("searchVal"), request.getParameter("searchCtnt"));
+            String value = request.getParameter("searchVal");
+            String ctnt = request.getParameter("searchCtnt");
+            model.addAttribute("value", value);
+            model.addAttribute("ctnt", ctnt);
+            int searchNum = service.selSearch(value, ctnt);
+            feedList = service.search(value, ctnt);
+            if(searchNum < 10) {
+                feedCount = 1;
+            } else {
+                if(request.getParameter("feedSearch") != null) {
+                    String searchCount = request.getParameter("feedSearch");
+                    int searchCountNum = Integer.parseInt(searchCount);
+                    System.out.println(searchCountNum);
+                    feedList = service.searchL(((searchCountNum-1) * 10), value, ctnt);
+                }
+                if(searchNum % 10 == 0) {
+                    feedCount = (searchNum / 10);
+                } else {
+                    feedCount = (searchNum / 10) + 1;
+                }
+                for(int i=1; i<=feedCount; i++) {
+                    list.add(i);
+                }
+                model.addAttribute("feedSearchCount", list);
+            }
             model.addAttribute("feed", feedList);
-            System.out.println(feedList);
         } else if(request.getParameter("feedCount") != null) { // 글목록 페이징 번호 클릭시 마다 보여줄 글(10개 단위)
             int count = Integer.parseInt(request.getParameter("feedCount"));
             if (count > 0) {
@@ -69,6 +82,20 @@ public class FeedController {
             } else {
                 feedList = service.selFeed(count);
                 model.addAttribute("feed", feedList);
+            }
+
+            if(feedCount < 10) {
+                feedCount = 1;
+            } else {
+                if(feedCount % 10 == 0) {
+                    feedCount = (feedCount / 10);
+                } else {
+                    feedCount = (feedCount / 10) + 1;
+                }
+                for(int i=1; i<=feedCount; i++) {
+                    list.add(i);
+                }
+                model.addAttribute("feedCount", list);
             }
         }
         return "/feed/feedList";
