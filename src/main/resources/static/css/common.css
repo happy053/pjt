@@ -1,0 +1,172 @@
+html {
+    margin: 0;
+    pdding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: grid;
+}
+
+#content {
+    background-color: #ec9999;
+    margin-top: 80px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#header {
+    background-color: #40684d;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#searchCtnt {
+    width: 20rem;
+    height: 2rem;
+    border-radius: 10px;
+    border: none;
+}
+
+#searchBtn {
+    background-repeat: no-repeat;
+    width:2rem;
+    height:2rem;
+    border: none;
+}
+
+#searchVal {
+    border-radius: 10px;
+    border: none;
+}
+
+#search {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+#flex {
+    margin-top: 5rem;
+    display: flex;
+    width: 100%;
+    hieght: 100%;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background-color: #6f86de;
+}
+
+ul > li {
+    list-style: none;
+    float: left;
+    margin: 2px;
+    text-align: center;
+}
+
+
+
+.menu {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 30rem;
+    max-width: 0;
+    transition: 0.5s ease;
+    z-index: 1;
+    background-color: #eee;
+}
+
+.burger-icon {
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    z-index: 2;
+    padding: 8px 0;
+    top: 4px;
+    right: 4px;
+    user-select: none;
+    width: auto;
+    margin: 0;
+}
+
+.burger-icon .burger-sticks {
+    background: #333;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background;
+    width: 18px;
+}
+
+.burger-icon .burger-sticks:before,
+.burger-icon .burger-sticks:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all;
+    width: 100%;
+}
+
+.burger-icon .burger-sticks:before {  /* 햄버거 막대 거리 조절 */
+    top: 8px;
+}
+
+.burger-icon .burger-sticks:after { /* 햄버거 막대 거리 조절 */
+    top: -8px;
+}
+
+.burger-check { /*체크 상자 감추기*/
+    display: none;
+}
+
+.burger-check:checked~.menu { /*메뉴 창의 최대 가로 사이즈*/
+    max-width: 25rem;
+}
+
+.burger-check:checked~.burger-icon .burger-sticks { /*햄버거 클릭시 중간 막대 감추기*/
+    background: transparent;
+}
+
+.burger-check:checked~.burger-icon .burger-sticks:before {  /*햄버거 버튼 x 모양으로 변환*/
+    transform: rotate(-45deg);
+}
+
+.burger-check:checked~.burger-icon .burger-sticks:after {   /*햄버거 버튼 x 모양으로 변환*/
+    transform: rotate(45deg);
+}
+
+.burger-check:checked~.burger-icon:not(.steps) .burger-sticks:before,
+.burger-check:checked~.burger-icon:not(.steps) .burger-sticks:after {
+    top: 0;
+}
+
+#test {
+    height: 5000px;
+}
+
+
+

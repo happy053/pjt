@@ -4,14 +4,16 @@
       layout:decorator="default_layout">
 
 <th:block layout:fragment="css">
-    <link rel="stylesheet" href="/css/test/test.css" />
+    <link rel="stylesheet" href="/css/login.css" />
 </th:block>
 
     <div id="content" layout:fragment="content">
         <form th:action="@{login}" method="post" th:object="${param}">
-            <div><input type="text" th:field="*{id}" autofocus required></div>
-            <div><input type="password" th:field="*{pw}" required></div>
-            <div><input type="submit" value="로그인"></div>
+            <div id="loginArea">
+                <input class="login" type="text" th:field="*{id}" autofocus required>
+                <input class="login" type="password" th:field="*{pw}" required>
+                <input class="login" type="submit" value="로그인">
+            </div>
         </form>
     </div>
 

@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="default_layout">>
+
+
+
 <div id="content" layout:fragment="content">
     <form th:action="@{update}" method="post" th:object="${detail}">
         <div>제목 : <input type="text" th:field="*{title}" th:value="${detail.getTitle()}"></div>

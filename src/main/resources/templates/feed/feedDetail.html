@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="default_layout">>
-<div id="content" layout:fragment="content">
+      layout:decorator="default_layout">
 
+
+<div id="content" layout:fragment="content">
     <h1 th:text="${feed.getTitle()}"></h1>
     <div th:text="${feed.getId()}"></div><br>
     <div th:text="${feed.getYmd()}"></div><br>
