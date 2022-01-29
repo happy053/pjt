@@ -9,12 +9,14 @@
 
     <div id="content" layout:fragment="content">
         <form th:action="@{login}" method="post" th:object="${param}">
-            <div id="loginArea">
-                <input class="login" type="text" th:field="*{id}" autofocus required>
-                <input class="login" type="password" th:field="*{pw}" required>
-                <input class="login" type="submit" value="로그인">
+            <div id="sortArea">
+                <input class="sort" type="text" th:field="*{id}" autofocus required>
+                <input class="sort" type="password" th:field="*{pw}" required>
+                <input class="sort" type="submit" value="로그인">
+                <button class="sort"><a href="/user/join">회원가입</a></button>
             </div>
         </form>
+
     </div>
 
 

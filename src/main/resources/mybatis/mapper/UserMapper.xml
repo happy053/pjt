@@ -3,9 +3,9 @@
 <mapper namespace="market.user.UserMapper">
     <insert id="join">
         insert into user
-            ( id, pw, nm, tel, email)
+            ( id, pw, nm)
         values
-            ( #{id}, #{pw}, #{nm}, #{tel}, #{email})
+            ( #{id}, #{pw}, #{nm})
     </insert>
 
     <select resultType="market.user.model.UserEntity" id="selUser">

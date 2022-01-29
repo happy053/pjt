@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-#loginArea {
+#sortArea {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -11,7 +11,7 @@
     top: 0;
 }
 
-.login {
+.sort {
     width: 15rem;
     height: 2rem;
     border: none;

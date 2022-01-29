@@ -16,9 +16,19 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public int join(UserEntity param) {
-        String hashedPw = passwordEncoder.encode(param.getPw());
-        param.setPw(hashedPw);
-        return mapper.join(param);
+        if(!param.getPw().equals(param.getPwc())) {
+            if(param.getPw().length() < 5) {
+                return 2;
+            }
+            return 3;
+        } else if (param.getId().length() < 1) {
+            return 4;
+        } else {
+            String hashedPw = passwordEncoder.encode(param.getPw());
+            param.setPw(hashedPw);
+            return mapper.join(param);
+        }
+
     }
 
     public UserEntity selUser(UserEntity param) {

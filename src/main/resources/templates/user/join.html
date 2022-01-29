@@ -1,18 +1,23 @@
 <!DOCTYPE html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="default_layout">>
 
+<th:block layout:fragment="css">
+    <link rel="stylesheet" href="/css/login.css" />
+</th:block>
+
+
     <div id="content" layout:fragment="content">
         <form th:action="@{join}" method="post" th:object="${user}">
-            <div><input type="text" th:field="*{id}" placeholder="id" autofocus required></div>
-            <div><input type="password" th:field="*{pw}" placeholder="password" required></div>
-            <div><input type="text" th:field="*{nm}" placeholder="name" required></div>
-            <div><input type="tel" th:field="*{tel}" placeholder="tel" required></div>
-            <div><input type="email" th:field="*{email}" placeholder="email"></div>
-            <div>
-                <input type="submit" value="회원가입">
-                <input type="reset" value="초기화">
+            <div id="sortArea">
+                <div><input class="sort" type="text" th:field="*{id}" placeholder="아이디" autofocus required></div>
+                <div><input class="sort" type="password" th:field="*{pw}" placeholder="비밀번호" required></div>
+                <div><input class="sort" type="password" th:field="*{pwc}" placeholder="비밀번호확인" required></div>
+                <div><input class="sort" type="text" th:field="*{nm}" placeholder="이름" required></div>
+                <div><input class="sort" type="submit" value="회원가입"></div>
+                <div><input class="sort" type="reset" value="초기화"></div>
             </div>
         </form>
     </div>

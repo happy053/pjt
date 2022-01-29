@@ -10,9 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 
 @Controller
@@ -40,6 +43,8 @@ public class UserController {
         return "/user/non";
     }
 
+
+
     @GetMapping("/main")
     public String main() {
 
@@ -47,10 +52,32 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String join(UserEntity param) {
-        service.join(param);
-        return "redirect:/user/main";
+    public void join(UserEntity param, Model model, HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        int error = service.join(param);
+        if (error == 2) {
+            out.println("<script charset='utf-8' language='javascript'> alert('비밀번호는 6자 이상이어야 합니다.'); " +
+                    "location.href='join' </script>");
+            out.flush();
+        } else if (error == 3) {
+            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
+            out.println("<script charset='utf-8' language='javascript'> alert('비밀번호가 일치하지 않습니다.'); " +
+                    "location.href='join' </script>");
+            out.flush();
+        } else if (error == 4) {
+            out.println("<script charset='utf-8' language='javascript'> alert('아이디를 입력해주세요.'); " +
+                    "location.href='join' </script>");
+            out.flush();;
+        } else {
+            out.println("<script charset='utf-8' language='javascript'> alert('회원가입에 성공했습니다.'); " +
+                    "location.href='login' </script>");
+            out.flush();;
+        }
     }
+
+
 
 //    @PostMapping("/login")
 //    public String login(UserEntity param, HttpServletResponse response) throws Exception {
