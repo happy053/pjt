@@ -45,7 +45,6 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/user/main")
                 .failureUrl("/user/login");
 
-
         http.exceptionHandling()
                 .accessDeniedPage("/user/non");
 

@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +35,26 @@ public class FeedController {
     }
 
     @PostMapping("/write")
-    public String write(FeedEntity write, Principal principal) {
+    public String write(FeedEntity write, Principal principal, MultipartHttpServletRequest mRequest) {
+        List<MultipartFile> fileList = mRequest.getFiles("file");
+        String src = mRequest.getParameter("src");
+
+        String path = "C:\\image\\";
+
+        for(MultipartFile mf : fileList) {
+            String originFileName = mf.getOriginalFilename();
+            long fileSize = mf.getSize();
+
+            String safeFile = path + originFileName;
+            try {
+                mf.transferTo(new File(safeFile));
+            } catch(IllegalStateException e) {
+                e.printStackTrace();
+            } catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         UserEntity param = new UserEntity();
         param.setId(principal.getName());
         write.setUserNum(userService.selUser(param).getUserNum());
