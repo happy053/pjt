@@ -8,4 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
     UserEntity selUser(UserEntity param);
     int join(UserEntity param);
+    int plus(UserEntity param);
 }

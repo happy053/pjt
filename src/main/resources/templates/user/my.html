@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="default_layout">
+
+    <div id="content" layout:fragment="content">
+        <div th:text="${my.getId()}"></div>
+        <div th:text="${my.getNm()}"></div>
+        <div th:text="${my.getCoin()}"></div>
+
+        <form th:action="@{plus}" th:object="${user}" method="post">
+            <input type="text" th:field="*{coin}" placeholder="금액을 입력하세요.">
+            <input type="submit" value="충전하기">
+        </form>
+    </div>
+</html>

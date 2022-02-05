@@ -2,6 +2,7 @@ package market.user;
 
 import market.user.model.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.Principal;
 
 
 @Controller
@@ -34,7 +36,6 @@ public class UserController {
     @GetMapping("/login")
     public String login(Model model) {
         model.addAttribute("param", new UserEntity());
-
         return "/user/login";
     }
 
@@ -75,6 +76,30 @@ public class UserController {
                     "location.href='login' </script>");
             out.flush();;
         }
+    }
+
+    @GetMapping("/my")
+    public String myPage(Principal principal, Model model) {
+        UserEntity param = new UserEntity();
+        param.setId(principal.getName());
+        model.addAttribute("my", service.selUser(param));
+        model.addAttribute("user", new UserEntity());
+        return "/user/my";
+    }
+
+    @PostMapping("/plus")
+    public String plus(UserEntity param, Principal principal, HttpServletResponse response) throws IOException {
+        param.setId(principal.getName());
+        service.plus(param);
+
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<script charset='utf-8' language='javascript'> alert('충전이 완료되었습니다.'); " +
+                "location.href='login' </script>");
+        out.flush();
+
+        return "/user/my";
     }
 
 

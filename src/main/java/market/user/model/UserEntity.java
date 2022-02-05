@@ -12,4 +12,5 @@ public class UserEntity {
     private String pw;
     private String pwc;
     private String nm;
+    private int coin;
 }

@@ -35,6 +35,10 @@ public class UserService {
         return mapper.selUser(param);
     }
 
+    public int plus(UserEntity param) {
+        return mapper.plus(param);
+    }
+
 //    public boolean login(UserEntity param) {
 //        System.out.println("sdfkjaskflsdf");
 //        if(mapper.selUser(param) == null) {

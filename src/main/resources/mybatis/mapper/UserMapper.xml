@@ -12,4 +12,10 @@
         select * from user
         where id = #{id}
     </select>
+
+    <update id="plus">
+        update user
+        set coin = #{coin}
+        where id = #{id}
+    </update>
 </mapper>
