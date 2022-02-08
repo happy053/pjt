@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 public class FeedEntity {
     private int feedNum;
-    private String id;
+    private String nm;
     private String title;
     private String contents;
     private int sellNbuy;

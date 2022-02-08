@@ -37,5 +37,8 @@ public class FeedService {
     public ArrayList<FeedEntity> searchL(int count, String value, String ctnt) { return mapper.searchL(count, value, ctnt); }
     public int selSearch(String value, String ctnt) { return mapper.selSearch(value, ctnt); }
 
+    public int insImg(String imgName, int feedNum) { return mapper.insImg(imgName, feedNum); }
+    public int selFeedNum(FeedEntity param) { return mapper.selFeedNum(param); }
+
 
 }

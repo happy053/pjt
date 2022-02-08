@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -35,32 +37,42 @@ public class FeedController {
     }
 
     @PostMapping("/write")
-    public String write(FeedEntity write, Principal principal, MultipartHttpServletRequest mRequest) {
-        List<MultipartFile> fileList = mRequest.getFiles("file");
-        String src = mRequest.getParameter("src");
-
+    public String write(FeedEntity write, Principal principal, MultipartHttpServletRequest mRequest
+                        ,@RequestParam("file") MultipartFile[] file) throws IOException {
         String path = "C:\\image\\";
+        String fileOriginName = "";
+        String fileMultiName = "";
 
-        for(MultipartFile mf : fileList) {
-            String originFileName = mf.getOriginalFilename();
-            long fileSize = mf.getSize();
+        System.out.println(file[0]);
 
-            String safeFile = path + originFileName;
-            try {
-                mf.transferTo(new File(safeFile));
-            } catch(IllegalStateException e) {
-                e.printStackTrace();
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
-        }
+
+        System.out.println(fileMultiName);
 
         UserEntity param = new UserEntity();
         param.setId(principal.getName());
         write.setUserNum(userService.selUser(param).getUserNum());
-        write.setId(principal.getName());
+        write.setNm(userService.selUser(param).getNm());
 
         service.insFeed(write);
+        int feedNum = service.selFeedNum(write);
+
+        for(int i=0; i<file.length; i++) {
+            fileOriginName = file[i].getOriginalFilename();
+            System.out.println(fileOriginName);
+            SimpleDateFormat formatter = new SimpleDateFormat("YYYYMMDD-HHMMSS_"+i);
+            Calendar now = Calendar.getInstance();
+
+            String extension = fileOriginName.split("\\.")[1];
+
+            fileOriginName = formatter.format(now.getTime())+"."+extension;
+            System.out.println(fileOriginName);
+            service.insImg(fileOriginName, feedNum);
+
+            File f= new File(path+"\\"+fileOriginName);
+            file[i].transferTo(f);
+            if(i==0) { fileMultiName += fileOriginName; }
+            else{ fileMultiName += ","+fileOriginName; }
+        }
         return "redirect:/user/main";
     }
 

@@ -3,9 +3,9 @@
 <mapper namespace="market.feed.FeedMapper">
     <insert id="insFeed">
         insert into feed
-        ( title, contents, sellNbuy, userNum, id)
+        ( title, contents, sellNbuy, userNum, nm)
         values
-        (#{title}, #{contents}, #{sellNbuy}, #{userNum}, #{id})
+        (#{title}, #{contents}, #{sellNbuy}, #{userNum}, #{nm})
     </insert>
 
     <select resultType="market.feed.model.FeedEntity" id="selFeed">
@@ -53,5 +53,17 @@
         select count(*)
         from feed
         where ${value} like concat('%', #{ctnt}, '%')
+    </select>
+
+    <insert id="insImg">
+        insert into feedimg
+        (imgName, feedNum)
+        values
+        ( #{imgName}, #{feedNum})
+    </insert>
+
+    <select id="selFeedNum" resultType="int">
+        select feedNum from feed
+        where title = #{title} and contents = #{contents}
     </select>
 </mapper>
