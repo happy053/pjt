@@ -63,7 +63,6 @@ public class UserController {
                     "location.href='join' </script>");
             out.flush();
         } else if (error == 3) {
-            model.addAttribute("error", "비밀번호가 일치하지 않습니다.");
             out.println("<script charset='utf-8' language='javascript'> alert('비밀번호가 일치하지 않습니다.'); " +
                     "location.href='join' </script>");
             out.flush();

@@ -20,6 +20,8 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public UserDetailsService userDetails;
+    @Autowired
+    public LoginFailHandler failHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -43,7 +45,7 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("id")
                 .passwordParameter("pw")
                 .defaultSuccessUrl("/user/main")
-                .failureUrl("/user/login");
+                .failureHandler(failHandler);
 
         http.exceptionHandling()
                 .accessDeniedPage("/user/non");
